@@ -1,7 +1,6 @@
 # AI Multimodal Blood Cancer Detection
 
-<<<<<<< HEAD
-> **YOLO + GPT-2** | Multimodal AI for blood cancer detection and automated medical report generation
+# YOLO + GPT-2** | Multimodal AI for blood cancer detection and automated medical report generation
 
 [![YOLO](https://img.shields.io/badge/YOLO-v11-blue)](https://github.com/ultralytics/ultralytics)
 [![GPT-2](https://img.shields.io/badge/GPT-2-green)](https://github.com/openai/gpt-2)
@@ -9,7 +8,6 @@
 [![YOLO](https://img.shields.io/badge/YOLO-v11n-blue)](https://github.com/ultralytics/ultralytics)
 [![GPT-2](https://img.shields.io/badge/GPT-2-Small--Indonesian-green)](https://huggingface.co/flax-community/gpt2-small-indonesian)
 [![LoRA](https://img.shields.io/badge/LoRA-PEFT-orange)](https://github.com/huggingface/peft)
->>>>>>> a03264b349895e6e7c16209fa4fad2c89377c3d4
 [![FastAPI](https://img.shields.io/badge/FastAPI-blue)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-cyan)](https://tailwindcss.com/)
