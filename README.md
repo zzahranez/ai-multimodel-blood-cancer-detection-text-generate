@@ -24,13 +24,17 @@ This project uses **multimodal AI** (YOLO for vision + GPT-2 for language) to de
 ## 🧠 Multimodal Architecture
 YOLO v11 → Feature Extraction And Object Detect → GPT-2 → Medical Report Of The Detect Result 
 ## 📁 Project Structure
+```
 app/
-├── backend/ # FastAPI backend
-└── frontend/ # React frontend
+├── backend/        # FastAPI backend
+└── frontend/       # React frontend
 
 training/
-├── object-detection-yolo/ # YOLO training
-└── text-generation/ # GPT-2 fine-tuning
+├── object-detection-yolo/   # YOLO training
+└── text-generation/         # GPT-2 fine-tuning
+
+data_test/          # Sample images
+```
 
 data_test/ # Sample images
 
