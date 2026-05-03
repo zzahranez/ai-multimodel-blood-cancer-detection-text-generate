@@ -41,7 +41,7 @@ Input Image → YOLO11n → Cell Detection → Feature Extraction → GPT-2 (LoR
 
 ## 📊 Dataset
 
-**Source:** [Blood Cell Images for Cancer Detection](https://www.kaggle.com/datasets/your-link) by Sumith Singh Kothwal (Kaggle)
+**Source:** [Blood Cell Images for Cancer Detection]([https://www.kaggle.com/datasets/your-link](https://www.kaggle.com/datasets?search=blood+cell+cancer+image)) by Sumith Singh Kothwal (Kaggle)
 
 **Modifications:**
 - Re-labeled with bounding boxes (YOLO format)
