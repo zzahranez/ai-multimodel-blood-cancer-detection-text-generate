@@ -38,6 +38,24 @@ Multimodal AI for blood cancer detection using **YOLO11n** (computer vision) + *
 
 ## 🔄 Multimodal Pipeline
 Input Image → YOLO11n → Cell Detection → Feature Extraction → GPT-2 (LoRA) → Medical Report
+
+## 📊 Dataset
+
+**Source:** [Blood Cell Images for Cancer Detection](https://www.kaggle.com/datasets/your-link) by Sumith Singh Kothwal (Kaggle)
+
+**Modifications:**
+- Re-labeled with bounding boxes (YOLO format)
+- 5 cell classes: myeloblast, basophil, monocyte, erythroblast, seg_neutrophil
+- Custom annotation for object detection
+
+**License:** Open source (Kaggle / CC)
+
+## 🙏 Acknowledgment
+
+Thanks to **Sumith Singh Kothwal** for the original blood cell dataset on Kaggle.
+Dataset used with modifications for bounding box object detection.
+
+
 ## 📁 Project Structure
 ```
 app/
