@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Detection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+            background: #f9f9f9;
+        }
+        #fileInput {
+            display: none;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .detection-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .loading {
+            text-align: center;
+            color: #007bff;
+            display: none;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 YOLO Object Detection</h1>
+        
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <p>📁 Klik atau drag & drop gambar di sini</p>
+            <small>Support: JPG, PNG, JPEG</small>
+        </div>
+        
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <button id="detectBtn" onclick="detectImage()">🚀 Deteksi Gambar</button>
+        
+        <div class="loading" id="loading">
+            <p>⏳ Sedang memproses...</p>
+        </div>
+        
+        <div class="result" id="result" style="display: none;">
+            <h3>Hasil Deteksi:</h3>
+            <img id="resultImage" alt="Hasil deteksi">
+            <div class="detection-info" id="detectionInfo"></div>
+        </div>
+        
+        <div class="error" id="error"></div>
+    </div>
+
+    <script>
+        let selectedFile = null;
+        
+        // Pilih file
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            selectedFile = e.target.files[0];
+            if (selectedFile) {
+                document.querySelector('.upload-area p').innerHTML = `📄 ${selectedFile.name}`;
+            }
+        });
+        
+        // Drag & drop
+        const dropArea = document.querySelector('.upload-area');
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#007bff';
+        });
+        
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.style.borderColor = '#ccc';
+        });
+        
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.style.borderColor = '#ccc';
+            selectedFile = e.dataTransfer.files[0];
+            document.querySelector('.upload-area p').innerHTML = `📄 ${selectedFile.name}`;
+        });
+        
+        async function detectImage() {
+            if (!selectedFile) {
+                alert('Pilih gambar dulu!');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            document.getElementById('detectBtn').disabled = true;
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('error').innerHTML = '';
+            
+            try {
+                const response = await fetch('http://localhost:8000/detect', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Tampilkan gambar hasil (base64)
+                    if (data.image) {
+                        document.getElementById('resultImage').src = `data:image/jpeg;base64,${data.image}`;
+                    }
+                    
+                    // Tampilkan info deteksi
+                    const info = `
+                        <strong>Jumlah objek:</strong> ${data.num_detections || 0}<br>
+                        ${data.classes ? `<strong>Kelas:</strong> ${data.classes.join(', ')}<br>` : ''}
+                        ${data.confidences ? `<strong>Confidence:</strong> ${data.confidences.map(c => c.toFixed(2)).join(', ')}` : ''}
+                    `;
+                    document.getElementById('detectionInfo').innerHTML = info;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    document.getElementById('error').innerHTML = `Error: ${data.detail || 'Something wrong'}`;
+                }
+            } catch (error) {
+                document.getElementById('error').innerHTML = `Error: ${error.message}`;
+            } finally {
+                document.getElementById('detectBtn').disabled = false;
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

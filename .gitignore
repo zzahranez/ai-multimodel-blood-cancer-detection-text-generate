@@ -1,0 +1,67 @@
+# ====================
+# MODEL WEIGHTS
+# ====================
+app/backend/models/gpt2-merged-temp/
+
+# ====================
+# TRAINING RESULTS
+# ====================
+training/object-detection-yolo/runs/**
+training/text-generation/logs/
+training/text-generation/lora/**
+training/text-generation/models/**
+
+# ====================
+# DATASET GAMBAR (ignore SEMUA gambar)
+# ====================
+training/object-detection-yolo/data/**/*.jpg
+training/object-detection-yolo/data/**/*.png
+training/object-detection-yolo/data/**/*.jpeg
+training/object-detection-yolo/data/**/*.bmp
+
+# ====================
+# DATASET YOLO (labels)
+# ====================
+training/object-detection-yolo/dataset/**/*.txt
+training/object-detection-yolo/dataset/**/*.jpg
+training/object-detection-yolo/dataset/**/*.png
+
+# ====================
+# FILE COMPRESSED
+# ====================
+*.zip
+*.rar
+*.tar.gz
+*.7z
+
+# ====================
+# TEMPORARY & TEXT FILES
+# ====================
+*.txt
+*.log
+*.tmp
+
+# ====================
+# PYTHON
+# ====================
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# ====================
+# FRONTEND
+# ====================
+node_modules/
+dist/
+build/
+.env
+.env.local
+
+# ====================
+# IDE & OS
+# ====================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
